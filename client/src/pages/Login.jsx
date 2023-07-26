@@ -2,6 +2,7 @@ import {
   Button,
   FormControl,
   FormLabel,
+  Icon,
   Input,
   InputGroup,
   InputRightElement,
@@ -36,8 +37,8 @@ export default function Login() {
             value={password}
           />
           <InputRightElement w="4rem">
-            <Button mr={1} size="sm" onClick={() => setShow(!show)}>
-              {show ? "Hide" : "Show"}
+            <Button size="sm" onClick={() => setShow(!show)}>
+              {show ? <Icon as="ViewOffIcon" /> : <Icon as="ViewIcon" />}
             </Button>
           </InputRightElement>
         </InputGroup>

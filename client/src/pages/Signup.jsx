@@ -2,6 +2,7 @@ import {
   Button,
   FormControl,
   FormLabel,
+  Icon,
   Input,
   InputGroup,
   InputRightElement,
@@ -49,8 +50,8 @@ export default function Signup() {
             value={password}
           />
           <InputRightElement w="4rem">
-            <Button mr={1} size="sm" onClick={() => setShow(!show)}>
-              {show ? "Hide" : "Show"}
+            <Button size="sm" onClick={() => setShow(!show)}>
+              {show ? <Icon as="ViewOffIcon" /> : <Icon as="ViewIcon" />}
             </Button>
           </InputRightElement>
         </InputGroup>
@@ -65,8 +66,8 @@ export default function Signup() {
             value={confirmPassword}
           />
           <InputRightElement w="4rem">
-            <Button mr={1} size="sm" onClick={() => setShow(!show)}>
-              {show ? "Hide" : "Show"}
+            <Button size="sm" onClick={() => setShow(!show)}>
+              {show ? <Icon as="ViewOffIcon" /> : <Icon as="ViewIcon" />}
             </Button>
           </InputRightElement>
         </InputGroup>
@@ -77,7 +78,6 @@ export default function Signup() {
 
         <Input
           pt={1}
-          pl={1}
           type="file"
           accept="image/*"
           onChange={(e) => postDetails(e.target.files[0])}
