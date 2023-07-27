@@ -18,7 +18,7 @@ export default function Home() {
         d="flex"
         justifyContent="center"
         alignItems="center"
-        p={8}
+        p={6}
         w="100%"
         m="36px 0 8px 0"
         bg="white"
@@ -27,7 +27,7 @@ export default function Home() {
       >
         <Text
           textAlign="center"
-          fontSize="2xl"
+          fontSize="4xl"
           fontWeight="bold"
           color="blue.600"
         >
