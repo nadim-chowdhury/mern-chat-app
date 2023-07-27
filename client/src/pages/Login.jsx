@@ -2,10 +2,8 @@ import {
   Button,
   FormControl,
   FormLabel,
-  Icon,
   Input,
   InputGroup,
-  InputRightElement,
   VStack,
 } from "@chakra-ui/react";
 import { useState } from "react";
@@ -13,7 +11,6 @@ import { useState } from "react";
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [show, setShow] = useState(false);
 
   const submitHandler = () => {};
 
@@ -32,15 +29,10 @@ export default function Login() {
         <FormLabel>Password:</FormLabel>
         <InputGroup>
           <Input
-            type={show ? "text" : "password"}
+            type="password"
             onChange={(e) => setPassword(e.target.value)}
             value={password}
           />
-          <InputRightElement w="4rem">
-            <Button size="sm" onClick={() => setShow(!show)}>
-              {show ? <Icon as="ViewOffIcon" /> : <Icon as="ViewIcon" />}
-            </Button>
-          </InputRightElement>
         </InputGroup>
       </FormControl>
 

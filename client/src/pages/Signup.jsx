@@ -2,10 +2,8 @@ import {
   Button,
   FormControl,
   FormLabel,
-  Icon,
   Input,
   InputGroup,
-  InputRightElement,
   VStack,
 } from "@chakra-ui/react";
 import { useState } from "react";
@@ -16,7 +14,6 @@ export default function Signup() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [pic, setPic] = useState("");
-  const [show, setShow] = useState(false);
 
   const postDetails = (picture) => {};
 
@@ -45,15 +42,10 @@ export default function Signup() {
         <FormLabel>Password:</FormLabel>
         <InputGroup>
           <Input
-            type={show ? "text" : "password"}
+            type="password"
             onChange={(e) => setPassword(e.target.value)}
             value={password}
           />
-          <InputRightElement w="4rem">
-            <Button size="sm" onClick={() => setShow(!show)}>
-              {show ? <Icon as="ViewOffIcon" /> : <Icon as="ViewIcon" />}
-            </Button>
-          </InputRightElement>
         </InputGroup>
       </FormControl>
 
@@ -61,15 +53,10 @@ export default function Signup() {
         <FormLabel>Confirm Password:</FormLabel>
         <InputGroup>
           <Input
-            type={show ? "text" : "password"}
+            type="password"
             onChange={(e) => setConfirmPassword(e.target.value)}
             value={confirmPassword}
           />
-          <InputRightElement w="4rem">
-            <Button size="sm" onClick={() => setShow(!show)}>
-              {show ? <Icon as="ViewOffIcon" /> : <Icon as="ViewIcon" />}
-            </Button>
-          </InputRightElement>
         </InputGroup>
       </FormControl>
 

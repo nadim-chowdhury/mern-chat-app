@@ -23,7 +23,7 @@ export default function Home() {
         m="36px 0 8px 0"
         bg="white"
         borderRadius="lg"
-        borderWidth="2px"
+        borderWidth="1px"
       >
         <Text
           textAlign="center"
@@ -35,7 +35,7 @@ export default function Home() {
         </Text>
       </Box>
 
-      <Box bg="white" w="100%" p={4} borderRadius="lg" borderWidth="2px">
+      <Box bg="white" w="100%" p={4} borderRadius="lg" borderWidth="1px">
         <Tabs variant="enclosed" colorScheme="blue">
           <TabList>
             <Tab width="50%">Login</Tab>
