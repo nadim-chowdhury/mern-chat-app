@@ -8,6 +8,8 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function Signup() {
   const [name, setName] = useState("");
@@ -18,6 +20,7 @@ export default function Signup() {
   const [loading, setLoading] = useState(false);
 
   const toast = useToast();
+  const navigate = useNavigate();
 
   const postDetails = (picture) => {
     setLoading(true);
@@ -67,7 +70,74 @@ export default function Signup() {
     }
   };
 
-  const submitHandler = async () => {};
+  const submitHandler = async () => {
+    setLoading(true);
+    if (!name || !email || !password || !confirmPassword) {
+      toast({
+        title: "Please Fill All The Fields",
+        status: "warning",
+        duratiion: 5000,
+        isClosable: true,
+        position: "bottom",
+      });
+      setLoading(false);
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      toast({
+        title: "Password Doesn't Match",
+        status: "warning",
+        duratiion: 5000,
+        isClosable: true,
+        position: "bottom",
+      });
+      return;
+    }
+
+    try {
+      const config = {
+        headers: {
+          "Content-type": "application/json",
+        },
+      };
+
+      const { data } = await axios.post(
+        "/api/user",
+        {
+          name,
+          email,
+          password,
+          confirmPassword,
+          pic,
+        },
+        config
+      );
+
+      toast({
+        title: "Registration Successful",
+        status: "success",
+        duratiion: 5000,
+        isClosable: true,
+        position: "bottom",
+      });
+
+      localStorage.setItem("userInfo", JSON.stringify(data));
+      setLoading(false);
+      navigate("/chats");
+    } catch (err) {
+      console.log(err);
+
+      toast({
+        title: "Error Occured",
+        description: err.response.data.message,
+        status: "error",
+        duratiion: 5000,
+        isClosable: true,
+        position: "bottom",
+      });
+    }
+  };
 
   return (
     <VStack spacing="8px">
