@@ -5,6 +5,7 @@ import {
   Input,
   InputGroup,
   VStack,
+  useToast,
 } from "@chakra-ui/react";
 import { useState } from "react";
 
@@ -14,10 +15,59 @@ export default function Signup() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [pic, setPic] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const postDetails = (picture) => {};
+  const toast = useToast();
 
-  const submitHandler = () => {};
+  const postDetails = (picture) => {
+    setLoading(true);
+    if (picture === undefined) {
+      toast({
+        title: "Please Select an Image",
+        status: "warning",
+        duratiion: 5000,
+        isClosable: true,
+        position: "bottom",
+      });
+      return;
+    }
+
+    if (
+      picture.type === "image/jpeg" ||
+      picture.type === "image/jpg" ||
+      picture.type === "image/png"
+    ) {
+      const data = new FormData();
+      data.append("file", picture);
+      data.append("upload_preset", "chat-app");
+      data.append("cloud_name", "dlrio1x1n");
+      fetch("https://api.cloudinary.com/v1_1/dlrio1x1n/image/upload", {
+        method: "post",
+        body: data,
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          setPic(data.url.toString());
+          setLoading(false);
+        })
+        .catch((err) => {
+          console.log(err);
+          setLoading(false);
+        });
+    } else {
+      toast({
+        title: "Please Select an Image",
+        status: "warning",
+        duratiion: 5000,
+        isClosable: true,
+        position: "bottom",
+      });
+      setLoading(false);
+      return;
+    }
+  };
+
+  const submitHandler = async () => {};
 
   return (
     <VStack spacing="8px">
@@ -29,7 +79,7 @@ export default function Signup() {
           value={name}
         />
       </FormControl>
-      <FormControl id="email">
+      <FormControl id="signup-email">
         <FormLabel>Email:</FormLabel>
         <Input
           type="email"
@@ -38,7 +88,7 @@ export default function Signup() {
         />
       </FormControl>
 
-      <FormControl id="password">
+      <FormControl id="signup-password">
         <FormLabel>Password:</FormLabel>
         <InputGroup>
           <Input
@@ -71,7 +121,13 @@ export default function Signup() {
         />
       </FormControl>
 
-      <Button colorScheme="blue" width="100%" mt={4} onClick={submitHandler}>
+      <Button
+        colorScheme="blue"
+        width="100%"
+        mt={4}
+        onClick={submitHandler}
+        isLoading={loading}
+      >
         Submit
       </Button>
     </VStack>

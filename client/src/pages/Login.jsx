@@ -16,7 +16,7 @@ export default function Login() {
 
   return (
     <VStack spacing="8px">
-      <FormControl id="email">
+      <FormControl id="login-email">
         <FormLabel>Email:</FormLabel>
         <Input
           type="email"
@@ -25,7 +25,7 @@ export default function Login() {
         />
       </FormControl>
 
-      <FormControl id="password">
+      <FormControl id="login-password">
         <FormLabel>Password:</FormLabel>
         <InputGroup>
           <Input
