@@ -17,6 +17,8 @@ dotenv.config();
 connectDB();
 
 app.use("/api/user", userRoutes);
+app.use("/api/chat", chatRoutes);
+
 app.use(notfound);
 app.use(errorHandler);
 
